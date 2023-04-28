@@ -1,6 +1,9 @@
 name: Plan infrastructure changes to check .tf files
 
-on: push
+on:
+  push:
+    paths:
+      - clockify/terraform/**
 
 jobs:
   plan:
