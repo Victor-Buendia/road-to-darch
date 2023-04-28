@@ -8,7 +8,7 @@ on:
       - clockify/terraform/**
 
 jobs:
-  plan:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,4 +28,4 @@ jobs:
         cd clockify
         cd terraform
         terraform init
-        terraform apply
+        terraform apply -auto-approve 
