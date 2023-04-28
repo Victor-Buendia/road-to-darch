@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - clockify/terraform
+      - clockify/terraform/**
 
 jobs:
   plan:
