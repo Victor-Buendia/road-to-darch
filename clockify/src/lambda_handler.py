@@ -4,6 +4,7 @@ import pprint
 import os
 import logging
 import datetime 
+from models.time_entry import TimeEntry
 
 from aws.ssm import ParameterStoreFetcher
 
@@ -59,5 +60,9 @@ print(api_interactor.detailed_reports_endpoint)
 # date_filter = api_interactor.generate_time_filters(end_date='2023-05-12', interval_days=7)
 # print(date_filter)
 data, status = api_interactor.fetch_detailed_reports(end_date='2023-05-12', interval_days=7)
+
+objs = TimeEntry.from_api_object_list(json.loads(data))
+for i in objs:
+	print(i)
 print(status)
 # print(data)
