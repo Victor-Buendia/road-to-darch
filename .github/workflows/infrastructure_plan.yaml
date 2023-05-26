@@ -23,6 +23,9 @@ jobs:
         aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
     - name: Terraform Plan
+      env:
+        TF_VAR_postgres_username: ${{ secrets.TF_VAR_POSTGRES_USERNAME }}
+        TF_VAR_postgres_password: ${{ secrets.TF_VAR_POSTGRES_PASSWORD }}
       run: |
         cd clockify
         cd terraform

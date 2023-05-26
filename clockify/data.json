@@ -1,0 +1,259 @@
+{
+	"totals": [
+		{
+			"_id": "",
+			"totalTime": 80766,
+			"totalBillableTime": 80766,
+			"entriesCount": 10,
+			"totalAmount": 0.0,
+			"amounts": [
+				{
+					"type": "EARNED",
+					"value": 0.0
+				}
+			]
+		}
+	],
+	"timeentries": [
+		{
+			"_id": "645d1e39b6abdc0c55a79d35",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-11T13:56:25-03:00",
+				"end": "2023-05-11T19:31:30-03:00",
+				"duration": 20105
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "645ab58cb6abdc0c5573dbae",
+			"description": "\ud83d\udd34\ud83d\udfe1\ud83d\udd34 Clase de Espa\u00f1ol",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-09T18:05:15-03:00",
+				"end": "2023-05-09T19:11:48-03:00",
+				"duration": 3993
+			},
+			"billable": true,
+			"projectId": "5e9f4704ea8094116e994d87",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "Capacita\u00e7\u00e3o",
+			"projectColor": "#FFC107",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "645a75e92b58730ac6ac19b4",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-09T13:20:00-03:00",
+				"end": "2023-05-09T18:04:58-03:00",
+				"duration": 17098
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "645a2e7cfb230b5656cb06e9",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-09T08:29:00-03:00",
+				"end": "2023-05-09T09:12:42-03:00",
+				"duration": 2622
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "64597f5f0af9fb09de867c81",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-08T20:01:51-03:00",
+				"end": "2023-05-08T20:56:00-03:00",
+				"duration": 3249
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "64592c4ea5dec800a92bc4f2",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-08T14:07:25-03:00",
+				"end": "2023-05-08T15:11:49-03:00",
+				"duration": 3864
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "6458e9b5188934093768a30c",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-08T09:23:16-03:00",
+				"end": "2023-05-08T11:58:17-03:00",
+				"duration": 9301
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "6458e60c8f158d6d3f20470c",
+			"description": "Engenharia de Dados do Zero",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-08T09:07:40-03:00",
+				"end": "2023-05-08T09:23:13-03:00",
+				"duration": 933
+			},
+			"billable": true,
+			"projectId": "5e9f4704ea8094116e994d87",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "Capacita\u00e7\u00e3o",
+			"projectColor": "#FFC107",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "6458d80e5093e40e705cfe33",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-08T08:07:58-03:00",
+				"end": "2023-05-08T09:07:35-03:00",
+				"duration": 3577
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		},
+		{
+			"_id": "645538bc2d46af108318814f",
+			"description": "iFood",
+			"userId": "5e95c064ea8094116e8e0a54",
+			"timeInterval": {
+				"start": "2023-05-05T14:11:24-03:00",
+				"end": "2023-05-05T18:38:28-03:00",
+				"duration": 16024
+			},
+			"billable": true,
+			"projectId": "61e54e2ddc3256444ce00210",
+			"taskId": null,
+			"tagIds": null,
+			"approvalRequestId": null,
+			"isLocked": false,
+			"amount": null,
+			"rate": null,
+			"userName": "Buendia",
+			"userEmail": "victorbuendia03@gmail.com",
+			"projectName": "iFood",
+			"projectColor": "#F44336",
+			"clientName": "",
+			"clientId": ""
+		}
+	]
+}
