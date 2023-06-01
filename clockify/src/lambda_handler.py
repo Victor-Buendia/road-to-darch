@@ -14,7 +14,7 @@ logger = logging.getLogger()
 class Interactor:
 	def __init__(self, workspace_id, logger):
 		self.__fetcher = ParameterStoreFetcher('us-east-1', logger)
-		self.__api_key = self.__fetcher.fetch_parameter_value('prd-credentials.clockify.api-key')
+		self.__api_key = "ZDEwNzUwYjQtYzRmMi00M2NiLWE3MjMtZWU3YjEyY2ExOTlj" #self.__fetcher.fetch_parameter_value('prd-credentials.clockify.api-key')
 		self.__workspace_id = workspace_id
 		self.__api_date_format = "%Y-%m-%dT%H:%M:%S.%f%zZ"
 		self.__logger = logger
@@ -62,7 +62,7 @@ print(api_interactor.detailed_reports_endpoint)
 data, status = api_interactor.fetch_detailed_reports(end_date='2023-05-12', interval_days=7)
 
 objs = TimeEntry.from_api_object_list(json.loads(data))
-for i in objs:
-	print(i)
-print(status)
+
+insert_list = [obj.insert_tuple for obj in objs]
+print(insert_list)
 # print(data)

@@ -1,5 +1,6 @@
 class TimeEntry:
 	def __init__(self, id, description, start_timestamp, end_timestamp, duration, project_id):
+		self.encoding_format = 'utf-8'
 		self.id = id
 		self.duration = duration
 		self.project_id = project_id
@@ -22,6 +23,18 @@ class TimeEntry:
 
 	def encoded_string(string):
 		return bytes(str(string), 'utf-8').decode('utf-8')
+	
+	@property
+	def insert_tuple(self):
+		insert_tuple = (self.id,
+						self.duration,
+						self.project_id.encode(self.encoding_format),
+						self.description.encode(self.encoding_format),
+						self.end_timestamp,
+						self.start_timestamp,
+						self.duration_minutes)
+
+		return insert_tuple
 
 	@classmethod
 	def from_api_object_list(cls, object_list):
