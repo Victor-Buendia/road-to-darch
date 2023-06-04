@@ -10,7 +10,7 @@ class TimeEntry:
 		self.duration_minutes = self.get_duration_in_minutes()
 
 	def __str__(self):
-		return f'Time Entry: {self.id} - Minutes: {self.duration_minutes} - Description: {self.description}'
+		return f'Time Entry: {self.id} - Minutes: {self.duration_minutes} - Description: {self.description} - StartTimestamp: {self.start_timestamp}'
 
 	def get_duration_in_minutes(self):
 		return round(self.duration / 60.0, 2)
@@ -28,8 +28,8 @@ class TimeEntry:
 	def insert_tuple(self):
 		insert_tuple = (self.id,
 						self.duration,
-						self.project_id.encode(self.encoding_format),
-						self.description.encode(self.encoding_format),
+						self.project_id,
+						self.description,
 						self.end_timestamp,
 						self.start_timestamp,
 						self.duration_minutes)
@@ -45,10 +45,10 @@ class TimeEntry:
 			data = [
 				cls.deep_get(entry, "_id"),
 				cls.encoded_string(cls.deep_get(entry, "description")),
-				cls.deep_get(entry, "timeInterval.start_timestamp"),
-				cls.deep_get(entry, "timeInterval.end_timestamp"),
+				cls.deep_get(entry, "timeInterval.start"),
+				cls.deep_get(entry, "timeInterval.end"),
 				cls.deep_get(entry, "timeInterval.duration"),
-				cls.encoded_string(cls.deep_get(entry, "project_id"))
+				cls.encoded_string(cls.deep_get(entry, "projectId"))
 			]
 			objects.append(cls(*data))
 

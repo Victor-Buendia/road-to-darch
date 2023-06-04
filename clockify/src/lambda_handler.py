@@ -4,7 +4,9 @@ import pprint
 import os
 import logging
 import datetime 
+
 from models.time_entry import TimeEntry
+from database.postgres_connector import PostgresConnector
 
 from aws.ssm import ParameterStoreFetcher
 
@@ -14,7 +16,7 @@ logger = logging.getLogger()
 class Interactor:
 	def __init__(self, workspace_id, logger):
 		self.__fetcher = ParameterStoreFetcher('us-east-1', logger)
-		self.__api_key = "ZDEwNzUwYjQtYzRmMi00M2NiLWE3MjMtZWU3YjEyY2ExOTlj" #self.__fetcher.fetch_parameter_value('prd-credentials.clockify.api-key')
+		self.__api_key = self.__fetcher.fetch_parameter_value('prd-credentials.clockify.api-key')
 		self.__workspace_id = workspace_id
 		self.__api_date_format = "%Y-%m-%dT%H:%M:%S.%f%zZ"
 		self.__logger = logger
@@ -55,14 +57,18 @@ class Interactor:
 
 workspace_id = '5e95c064ea8094116e8e0a56'
 api_interactor = Interactor(workspace_id, logger)
-print(api_interactor.base_endpoint)
-print(api_interactor.detailed_reports_endpoint)
+# print(api_interactor.base_endpoint)
+# print(api_interactor.detailed_reports_endpoint)
 # date_filter = api_interactor.generate_time_filters(end_date='2023-05-12', interval_days=7)
 # print(date_filter)
-data, status = api_interactor.fetch_detailed_reports(end_date='2023-05-12', interval_days=7)
+data, status = api_interactor.fetch_detailed_reports(end_date='2023-05-12', interval_days=365)
 
+# print(data)
 objs = TimeEntry.from_api_object_list(json.loads(data))
 
 insert_list = [obj.insert_tuple for obj in objs]
-print(insert_list)
+# print(insert_list)
+
+conn = PostgresConnector(logger)
+conn.populate_database(tuples=insert_list)
 # print(data)
