@@ -1,3 +1,4 @@
+
 class TimeEntry:
 	def __init__(self, id, description, start_timestamp, end_timestamp, duration, project_id):
 		self.encoding_format = 'utf-8'
@@ -14,15 +15,15 @@ class TimeEntry:
 
 	def get_duration_in_minutes(self):
 		return round(self.duration / 60.0, 2)
-	
+
+	def encoded_string(string):
+		return bytes(str(string), 'utf-8').decode('utf-8')
+
 	def deep_get(dictionary, key_separated_by_dots):
 		levels = key_separated_by_dots.split('.')
 		for level in levels:
 			dictionary = dictionary.get(level)
 		return dictionary
-
-	def encoded_string(string):
-		return bytes(str(string), 'utf-8').decode('utf-8')
 	
 	@property
 	def insert_tuple(self):
