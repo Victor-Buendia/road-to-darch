@@ -1,10 +1,6 @@
 import psycopg2
-import logging
 
-from src.aws.ssm import ParameterStoreFetcher
-
-logging.basicConfig(format="[%(levelname)s][%(asctime)s][%(filename)-15s][%(lineno)4d][%(threadName)10s] - %(message)s", level=logging.INFO, force=True)
-logger = logging.getLogger()
+from aws.ssm import ParameterStoreFetcher
 
 class PostgresConnector:
 	def __init__(self, logger):
@@ -12,10 +8,11 @@ class PostgresConnector:
 		self.database_user = self.__fetcher.fetch_parameter_value('prd-credentials.clockify.postgres-user')
 		self.database_password = self.__fetcher.fetch_parameter_value('prd-credentials.clockify.postgres-pw')
 		self.host = self.__fetcher.fetch_parameter_value('prd-credentials.clockify.postgres-host')
-
+		self.__logger = logger 
 		self.establish_connection()
 
 	def establish_connection(self):
+		self.__logger.info(f"Establishing connection to database.")
 		self.connection =  psycopg2.connect(
 							database="db01",
 							user=self.database_user,
@@ -37,16 +34,14 @@ class PostgresConnector:
 				duration_minutes FLOAT
 			)
 		"""
+		self.__logger.info(f"Running create table if not exists.")
 		self.cursor.execute(time_entry_table)
 
 	def populate_database(self, tuples):
+		self.__logger.info(f"Inserting data with length {len(tuples)}.")
 		sql = 'INSERT INTO timeentry VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (id) DO UPDATE SET (duration, project_id, description, end_timestamp, start_timestamp, duration_minutes) = (EXCLUDED.duration, EXCLUDED.project_id, EXCLUDED.description, EXCLUDED.end_timestamp, EXCLUDED.start_timestamp, EXCLUDED.duration_minutes);'
 
 		self.cursor.executemany(sql, tuples)
+		self.__logger.info(f"Data successfully inserted.")
 
-if __name__ == '__main__':
-	conn = PostgresConnector(logger)
-	# conn.cursor.execute('''
-	# 	CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);
-	# ''')
  

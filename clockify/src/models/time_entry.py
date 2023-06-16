@@ -1,3 +1,4 @@
+from utils.misc import deep_get
 
 class TimeEntry:
 	def __init__(self, id, description, start_timestamp, end_timestamp, duration, project_id):
@@ -19,12 +20,6 @@ class TimeEntry:
 	def encoded_string(string):
 		return bytes(str(string), 'utf-8').decode('utf-8')
 
-	def deep_get(dictionary, key_separated_by_dots):
-		levels = key_separated_by_dots.split('.')
-		for level in levels:
-			dictionary = dictionary.get(level)
-		return dictionary
-	
 	@property
 	def insert_tuple(self):
 		insert_tuple = (self.id,
@@ -44,12 +39,12 @@ class TimeEntry:
 		objects = []
 		for entry in time_entries:
 			data = [
-				cls.deep_get(entry, "_id"),
-				cls.encoded_string(cls.deep_get(entry, "description")),
-				cls.deep_get(entry, "timeInterval.start"),
-				cls.deep_get(entry, "timeInterval.end"),
-				cls.deep_get(entry, "timeInterval.duration"),
-				cls.encoded_string(cls.deep_get(entry, "projectId"))
+				deep_get(entry, "_id"),
+				cls.encoded_string(deep_get(entry, "description")),
+				deep_get(entry, "timeInterval.start"),
+				deep_get(entry, "timeInterval.end"),
+				deep_get(entry, "timeInterval.duration"),
+				cls.encoded_string(deep_get(entry, "projectId"))
 			]
 			objects.append(cls(*data))
 
