@@ -24,14 +24,15 @@ class PostgresConnector:
 		self.cursor = self.connection.cursor()
 
 		time_entry_table = """
-			CREATE TABLE IF NOT EXISTS TimeEntry (
+			CREATE TABLE IF NOT EXISTS timeentry (
 				id VARCHAR PRIMARY KEY,
 				duration INT,
 				project_id VARCHAR,
 				description VARCHAR,
 				end_timestamp TIMESTAMPTZ,
 				start_timestamp TIMESTAMPTZ,
-				duration_minutes FLOAT
+				duration_minutes FLOAT,
+				updated_at timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 			)
 		"""
 		self.__logger.info(f"Running create table if not exists.")
@@ -39,7 +40,7 @@ class PostgresConnector:
 
 	def populate_database(self, tuples):
 		self.__logger.info(f"Inserting data with length {len(tuples)}.")
-		sql = 'INSERT INTO timeentry VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (id) DO UPDATE SET (duration, project_id, description, end_timestamp, start_timestamp, duration_minutes) = (EXCLUDED.duration, EXCLUDED.project_id, EXCLUDED.description, EXCLUDED.end_timestamp, EXCLUDED.start_timestamp, EXCLUDED.duration_minutes);'
+		sql = 'INSERT INTO timeentry VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT (id) DO UPDATE SET (duration, project_id, description, end_timestamp, start_timestamp, duration_minutes, updated_at) = (EXCLUDED.duration, EXCLUDED.project_id, EXCLUDED.description, EXCLUDED.end_timestamp, EXCLUDED.start_timestamp, EXCLUDED.duration_minutes, current_timestamp);'
 
 		self.cursor.executemany(sql, tuples)
 		self.__logger.info(f"Data successfully inserted.")

@@ -30,7 +30,7 @@ def lambda_handler(event, context):
 		data = api_interactor.retrieve_data(headers=headers, filters=filters)
 
 		time_entry_insert_list = generate_time_entry_insert_list(data, logger)
-		# logger.info(f"data: {time_entry_insert_list}")
+		
 		conn.populate_database(tuples=time_entry_insert_list)
 		total_pages = api_interactor.calculate_total_pages(data)
 		current_page += 1
