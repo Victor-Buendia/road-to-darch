@@ -1,5 +1,8 @@
+from utils.misc import deep_get
+
 class TimeEntry:
 	def __init__(self, id, description, start_timestamp, end_timestamp, duration, project_id):
+		self.encoding_format = 'utf-8'
 		self.id = id
 		self.duration = duration
 		self.project_id = project_id
@@ -9,19 +12,25 @@ class TimeEntry:
 		self.duration_minutes = self.get_duration_in_minutes()
 
 	def __str__(self):
-		return f'Time Entry: {self.id} - Minutes: {self.duration_minutes} - Description: {self.description}'
+		return f'Time Entry: {self.id} - Minutes: {self.duration_minutes} - Description: {self.description} - StartTimestamp: {self.start_timestamp}'
 
 	def get_duration_in_minutes(self):
 		return round(self.duration / 60.0, 2)
-	
-	def deep_get(dictionary, key_separated_by_dots):
-		levels = key_separated_by_dots.split('.')
-		for level in levels:
-			dictionary = dictionary.get(level)
-		return dictionary
 
 	def encoded_string(string):
 		return bytes(str(string), 'utf-8').decode('utf-8')
+
+	@property
+	def insert_tuple(self):
+		insert_tuple = (self.id,
+						self.duration,
+						self.project_id,
+						self.description,
+						self.end_timestamp,
+						self.start_timestamp,
+						self.duration_minutes)
+
+		return insert_tuple
 
 	@classmethod
 	def from_api_object_list(cls, object_list):
@@ -30,12 +39,12 @@ class TimeEntry:
 		objects = []
 		for entry in time_entries:
 			data = [
-				cls.deep_get(entry, "_id"),
-				cls.encoded_string(cls.deep_get(entry, "description")),
-				cls.deep_get(entry, "timeInterval.start_timestamp"),
-				cls.deep_get(entry, "timeInterval.end_timestamp"),
-				cls.deep_get(entry, "timeInterval.duration"),
-				cls.encoded_string(cls.deep_get(entry, "project_id"))
+				deep_get(entry, "_id"),
+				cls.encoded_string(deep_get(entry, "description")),
+				deep_get(entry, "timeInterval.start"),
+				deep_get(entry, "timeInterval.end"),
+				deep_get(entry, "timeInterval.duration"),
+				cls.encoded_string(deep_get(entry, "projectId"))
 			]
 			objects.append(cls(*data))
 
