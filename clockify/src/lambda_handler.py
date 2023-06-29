@@ -8,7 +8,6 @@ from database.postgres_connector import PostgresConnector
 
 
 def lambda_handler(event, context):
-
     logging.basicConfig(
         format="[%(levelname)s][%(asctime)s][%(filename)-15s][%(lineno)4d][%(threadName)10s] - %(message)s",
         level=logging.INFO,

@@ -1,2 +1,2 @@
-environment="prd"
-project_name="clockify-study"
+environment  = "prd"
+project_name = "clockify-study"
