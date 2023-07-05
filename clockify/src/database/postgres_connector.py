@@ -2,7 +2,6 @@ import psycopg2
 
 from aws.ssm import ParameterStoreFetcher
 
-
 class PostgresConnector:
     def __init__(self, logger):
         self.__fetcher = ParameterStoreFetcher("us-east-1", logger)
@@ -26,6 +25,7 @@ class PostgresConnector:
             password=self.database_password,
             host=self.host,
             port="5432",
+            connect_timeout=10
         )
 
         self.connection.autocommit = True
