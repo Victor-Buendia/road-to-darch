@@ -6,12 +6,7 @@ import os
 from models.time_entry import TimeEntry
 from models.clockify_api_interactor import ApiInteractor
 from database.postgres_connector import PostgresConnector
-<<<<<<< HEAD
-from aws.ssm import ParameterStoreFetcher
-
-=======
 from config.env_variables import Environment
->>>>>>> b3001dd (Chore: create environment variables for sensitive data)
 
 def lambda_handler(event, context):
     logging.basicConfig(
