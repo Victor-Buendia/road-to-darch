@@ -21,7 +21,10 @@ class TimeEntry:
         return round(self.duration / 60.0, 2)
 
     def encoded_string(string):
-        return bytes(str(string), "utf-8").decode("utf-8")
+        if string is not None:
+            return bytes(str(string), "utf-8").decode("utf-8")
+        else:
+            return None
 
     @property
     def insert_tuple(self):
