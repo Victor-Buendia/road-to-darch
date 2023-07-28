@@ -5,6 +5,7 @@ import logging
 from models.time_entry import TimeEntry
 from models.clockify_api_interactor import ApiInteractor
 from database.postgres_connector import PostgresConnector
+from aws.ssm import ParameterStoreFetcher
 
 
 def lambda_handler(event, context):
@@ -17,9 +18,12 @@ def lambda_handler(event, context):
 
     workspace_id = "5e95c064ea8094116e8e0a56"
     end_date = "2023-05-12"
-    interval_days = 365
+    interval_days = 30
+    api_key_ssm_path = "prd-credentials.clockify.api-key"
 
-    api_interactor = ApiInteractor(workspace_id, logger)
+    fetcher = ParameterStoreFetcher("us-east-1", logger)
+    api_key = fetcher.fetch_parameter_value(api_key_ssm_path)
+    api_interactor = ApiInteractor(workspace_id, api_key, logger)
     headers = api_interactor.generate_headers()
 
     conn = PostgresConnector(logger)

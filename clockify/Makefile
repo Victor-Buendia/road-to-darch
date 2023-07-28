@@ -31,3 +31,12 @@ lint-check:
 		exit 1; \
 	fi
 	black src --check
+
+.PHONY: coverage-test
+coverage-test:
+	rm -rf htmlcov
+	PYTHONPATH=$(PYTHONPATH):src/ coverage run --omit="src/tests/*,*/__init__.py,/usr/*"  -m pytest src/tests
+	coverage html
+	google-chrome htmlcov/index.html
+
+	
