@@ -8,7 +8,7 @@ class ClockifyConfiguration():
 	def __init__(self, logger):
 		self.__logger = logger
 
-		dotenv_path = join(dirname(__file__), "../../environment/.env")
+		dotenv_path = join(dirname(__file__), "../../config/.env")
 		self.__logger.info(f"checking for environment variables {dotenv_path}")
 		load_dotenv(dotenv_path)
 		
@@ -57,13 +57,3 @@ class ClockifyConfiguration():
 			if variable not in os.environ:
 				missing_variable_list.append(variable)
 		return missing_variable_list
-
-		
-logging.basicConfig(
-	format="[%(levelname)s][%(asctime)s][%(filename)-15s][%(lineno)4d][%(threadName)10s] - %(message)s",
-	level=logging.INFO,
-	force=True,
-)
-logger = logging.getLogger()
-
-env = ClockifyConfiguration(logger)

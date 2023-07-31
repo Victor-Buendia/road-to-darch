@@ -6,7 +6,7 @@ import os
 from models.time_entry import TimeEntry
 from models.clockify_api_interactor import ApiInteractor
 from database.postgres_connector import PostgresConnector
-from config.env_variables import Environment
+from configuration.configuration import ClockifyConfiguration
 
 def lambda_handler(event, context):
     logging.basicConfig(
@@ -15,9 +15,10 @@ def lambda_handler(event, context):
         force=True,
     )
     logger = logging.getLogger()
+    configuration = ClockifyConfiguration(logger)
 
     end_date = "2023-05-12"
-    interval_days = Environment().INTERVAL_DAYS
+    interval_days = configuration.INTERVAL_DAYS
 
     api_interactor = ApiInteractor(logger)
     headers = api_interactor.generate_headers()
