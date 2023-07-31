@@ -4,13 +4,19 @@ import os
 import datetime
 import math
 
+from aws.ssm import ParameterStoreFetcher
+from configuration.configuration import ClockifyConfiguration
 
 class ApiInteractor:
-    def __init__(self, workspace_id, api_key, logger):
-        self.__api_key = api_key
-        self.__workspace_id = workspace_id
-        self.__api_date_format = "%Y-%m-%dT%H:%M:%S.%f%zZ"
+    def __init__(self, logger):
+        self.__fetcher = ParameterStoreFetcher("us-east-1", logger)
         self.__logger = logger
+        self.__configuration = ClockifyConfiguration(self.__logger)
+        self.__api_key = self.__fetcher.fetch_parameter_value(
+            "prd-credentials.clockify.api-key"
+        )
+        self.__workspace_id = self.__configuration.WORKSPACE_ID
+        self.__api_date_format = "%Y-%m-%dT%H:%M:%S.%f%zZ"
         self.__page_size = 50
 
     class UnexpectedStatusCode(Exception):
