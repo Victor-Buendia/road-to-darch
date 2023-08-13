@@ -39,4 +39,7 @@ coverage-test:
 	coverage html
 	google-chrome htmlcov/index.html
 
-	
+.PHONY: run-local
+run-local:
+	export $(grep -v '^#' environment/.env | xargs)
+	python3 src/lambda_handler.py

@@ -1,10 +1,9 @@
 import boto3
-from configuration.configuration import ClockifyConfiguration
+import os 
 
 class ParameterStoreFetcher:
     def __init__(self, region, logger):
         self.__logger = logger
-        self.__configuration = ClockifyConfiguration(self.__logger)
         self.__region = region
         self.__client = boto3.client("ssm", 
                                     region_name=self.__region)
