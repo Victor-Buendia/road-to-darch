@@ -13,7 +13,6 @@ boto3 = "^1.26.129"
 psycopg2 = "^2.9.6"
 black = "^23.3.0"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
