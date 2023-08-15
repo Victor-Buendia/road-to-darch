@@ -13,8 +13,11 @@ class ClockifyConfiguration():
 		self.required_variables = [
 			"AWS_REGION",
 			"WORKSPACE_ID",
+			"INTERVAL_DAYS",
 			"API_KEY_SSM_PATH",
-			"INTERVAL_DAYS"
+			"DATABASE_USER_SSM_PATH",
+			"DATABASE_PW_SSM_PATH",
+			"DATABASE_HOST_SSM_PATH"
 		]
 		self.optional_variables = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 		self.check_required_vars()
@@ -31,6 +34,9 @@ class ClockifyConfiguration():
 
 	def initialize_fetched_config_variables(self):
 		self.API_KEY = self.__fetcher.fetch_parameter_value(os.environ.get("API_KEY_SSM_PATH"))
+		self.DATABASE_HOST = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_HOST_SSM_PATH"))
+		self.DATABASE_USER = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_USER_SSM_PATH"))
+		self.DATABASE_PW = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_PW_SSM_PATH"))
 
 	class EnvironmentVariablesMissing(Exception):
 		def __init__(self, missing):
