@@ -62,6 +62,6 @@ class ClockifyConfiguration():
 	def check_variable_existence(self, variable_list):
 		missing_variable_list = []
 		for variable in variable_list:
-			if variable not in os.environ:
+			if variable not in os.environ or os.environ.get(variable) == "":
 				missing_variable_list.append(variable)
 		return missing_variable_list

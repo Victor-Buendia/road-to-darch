@@ -42,3 +42,4 @@ coverage-test:
 .PHONY: run-local
 run-local:
 	export $(grep -v '^#' environment/.env | xargs) && 	python3 src/lambda_handler.py
+	# export does not work 
