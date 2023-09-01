@@ -1,17 +1,11 @@
 import os
-from os.path import join, dirname
-from dotenv import load_dotenv
-
 import logging
+from os.path import join, dirname
 
 class ClockifyConfiguration():
 	def __init__(self, logger):
 		self.__logger = logger
 
-		dotenv_path = join(dirname(__file__), "../../config/.env")
-		self.__logger.info(f"checking for environment variables {dotenv_path}")
-		load_dotenv(dotenv_path)
-		
 		self.required_variables = [
 			"BASE_URL",
 			"WORKSPACE_ID",

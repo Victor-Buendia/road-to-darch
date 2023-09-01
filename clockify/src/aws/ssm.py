@@ -7,9 +7,7 @@ class ParameterStoreFetcher:
         self.__configuration = ClockifyConfiguration(self.__logger)
         self.__region = region
         self.__client = boto3.client("ssm", 
-                                    region_name=self.__region,
-                                    aws_access_key_id=self.__configuration.AWS_ACCESS_KEY_ID, 
-                                    aws_secret_access_key=self.__configuration.AWS_SECRET_ACCESS_KEY)
+                                    region_name=self.__region)
 
     # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ssm/client/get_parameters.html
     def fetch_parameter_value(self, param_name, decryption=True):
