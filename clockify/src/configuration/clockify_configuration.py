@@ -1,33 +1,47 @@
 import os
-import logging
 from os.path import join, dirname
+from dotenv import load_dotenv
+
+from aws.ssm import ParameterStoreFetcher
+
+import logging
 
 class ClockifyConfiguration():
 	def __init__(self, logger):
 		self.__logger = logger
-
+		
 		self.required_variables = [
-			"BASE_URL",
+			"AWS_REGION",
 			"WORKSPACE_ID",
-			"API_KEY",
-			"INTERVAL_DAYS"
+			"INTERVAL_DAYS",
+			"API_KEY_SSM_PATH",
+			"DATABASE_USER_SSM_PATH",
+			"DATABASE_PW_SSM_PATH",
+			"DATABASE_HOST_SSM_PATH"
 		]
 		self.optional_variables = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
 		self.check_required_vars()
-		self.initialize_config_variables()
+		self.initialize_simple_config_variables()
+		self.__fetcher = ParameterStoreFetcher(self.AWS_REGION, logger)
+		self.initialize_fetched_config_variables()
 
-	def initialize_config_variables(self):
-		self.BASE_URL = os.environ.get("BASE_URL")
+	def initialize_simple_config_variables(self):
+		self.AWS_REGION = os.environ.get("AWS_REGION")
 		self.WORKSPACE_ID = os.environ.get("WORKSPACE_ID")
-		self.API_KEY = os.environ.get("API_KEY")
 		self.AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 		self.AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 		self.INTERVAL_DAYS = int(os.environ.get("INTERVAL_DAYS"))
 
+	def initialize_fetched_config_variables(self):
+		self.API_KEY = self.__fetcher.fetch_parameter_value(os.environ.get("API_KEY_SSM_PATH"))
+		self.DATABASE_HOST = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_HOST_SSM_PATH"))
+		self.DATABASE_USER = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_USER_SSM_PATH"))
+		self.DATABASE_PW = self.__fetcher.fetch_parameter_value(os.environ.get("DATABASE_PW_SSM_PATH"))
+
 	class EnvironmentVariablesMissing(Exception):
 		def __init__(self, missing):
 			self.message = (
-				f"\nYour /config/.env file is missing the following variables: \n  "
+				f"\nYour environment is missing the following variables: \n  "
 				+ "\n  ".join(missing)
 			)
 			super().__init__(self.message)
@@ -48,6 +62,6 @@ class ClockifyConfiguration():
 	def check_variable_existence(self, variable_list):
 		missing_variable_list = []
 		for variable in variable_list:
-			if variable not in os.environ:
+			if variable not in os.environ or os.environ.get(variable) == "":
 				missing_variable_list.append(variable)
 		return missing_variable_list

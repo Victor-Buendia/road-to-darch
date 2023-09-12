@@ -1,19 +1,11 @@
 import psycopg2
 
-from aws.ssm import ParameterStoreFetcher
 
 class PostgresConnector:
-    def __init__(self, logger):
-        self.__fetcher = ParameterStoreFetcher("us-east-1", logger)
-        self.database_user = self.__fetcher.fetch_parameter_value(
-            "prd-credentials.clockify.postgres-user"
-        )
-        self.database_password = self.__fetcher.fetch_parameter_value(
-            "prd-credentials.clockify.postgres-pw"
-        )
-        self.host = self.__fetcher.fetch_parameter_value(
-            "prd-credentials.clockify.postgres-host"
-        )
+    def __init__(self, logger, host, database_user, database_password):
+        self.__database_user = database_user
+        self.__database_password = database_password
+        self.__host = host
         self.__logger = logger
         self.establish_connection()
 
@@ -21,9 +13,9 @@ class PostgresConnector:
         self.__logger.info(f"Establishing connection to database.")
         self.connection = psycopg2.connect(
             database="db01",
-            user=self.database_user,
-            password=self.database_password,
-            host=self.host,
+            user=self.__database_user,
+            password=self.__database_password,
+            host=self.__host,
             port="5432",
             connect_timeout=10
         )
